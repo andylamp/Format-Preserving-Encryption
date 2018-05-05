@@ -5,6 +5,8 @@ SO_LINKS = -lm -lcrypto
 LIB = libfpe.a libfpe.so
 EXAMPLE_SRC = example.c
 EXAMPLE_EXE = example
+FPE_BENCH_SRC = fpe_bench.c
+FPE_BENCH_EXE = fpe_bench
 OBJS = src/ff1.o src/ff3.o src/fpe_locl.o
 
 # mac specific
@@ -22,7 +24,7 @@ ifeq ($(UNAME),Linux)
 	ADD_INC_LOC = 
 endif
 
-all: $(LIB) $(EXAMPLE_EXE)
+all: $(LIB) $(EXAMPLE_EXE) $(FPE_BENCH_EXE)
 
 libfpe.a: $(OBJS)
 	ar rcs $@ $(OBJS)
@@ -43,7 +45,12 @@ src/fpe_locl.o: src/fpe_locl.c
 	cc $(CFLAGS) -c src/fpe_locl.c -o $@ $(ADD_INC_LOC)
 
 $(EXAMPLE_EXE): $(EXAMPLE_SRC) $(LIB)
-	gcc $(LD_FLAG) $(EXAMPLE_SRC) -L. -lfpe -Isrc -O2 -o $@ $(ADD_INC_LOC) $(ADD_LIB_LOC)
+	gcc $(LD_FLAG) $(EXAMPLE_SRC) -L. -lfpe -Isrc -O2 -o $@ \
+	$(ADD_INC_LOC) $(ADD_LIB_LOC)
+
+$(FPE_BENCH_EXE): $(FPE_BENCH_SRC) $(LIB)
+	gcc $(LD_FLAG) $(FPE_BENCH_SRC) -L. -lfpe -Isrc -O2 -o $@ \
+	$(ADD_INC_LOC) $(ADD_LIB_LOC)
 
 clean:
 	rm $(OBJS) *.so* *.a
