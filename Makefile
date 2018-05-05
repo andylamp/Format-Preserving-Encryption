@@ -46,9 +46,9 @@ $(EXAMPLE_EXE): $(EXAMPLE_SRC) $(LIB)
 	gcc $(LD_FLAG) $(EXAMPLE_SRC) -L. -lfpe -Isrc -O2 -o $@ $(ADD_INC_LOC) $(ADD_LIB_LOC)
 
 clean:
-	rm $(OBJS)
+	rm $(OBJS) *.so* *.a
 
 remake:
-	make clean
+	-make clean
 	make all
 
