@@ -33,7 +33,7 @@ libfpe.so: $(OBJS)
 	cc -shared -fPIC $(SONAME_ARG),libfpe.so $(OBJS) $(SO_LINKS) -o $@ \
 	$(ADD_INC_LOC) $(ADD_LIB_LOC)
 
-.PHONY = all clean remake
+.PHONY = all bench test clean remake
 
 src/ff1.o: src/ff1.c
 	cc $(CFLAGS) -c src/ff1.c -o $@ $(ADD_INC_LOC)
@@ -58,4 +58,11 @@ clean:
 remake:
 	-make clean
 	make all
+
+bench:
+	-make all
+	./fpe_bench
+
+test:
+	python2 ./test.py
 

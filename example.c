@@ -4,10 +4,10 @@
 #include <string.h>
 #include <fpe.h>
 
-void hex2chars(unsigned char hex[], unsigned char result[])
+void hex2chars(char hex[], char result[])
 {
     int len = strlen(hex);
-    unsigned char temp[3];
+    char temp[3];
     temp[2] = 0x00;
 
     int j = 0;
@@ -19,7 +19,7 @@ void hex2chars(unsigned char hex[], unsigned char result[])
     }
 }
 
-void map_chars(unsigned char str[], unsigned int result[])
+void map_chars(char str[], unsigned int result[])
 {
     int len = strlen(str);
 
@@ -30,7 +30,7 @@ void map_chars(unsigned char str[], unsigned int result[])
             result[i] = str[i] - '0';
 }
 
-void inverse_map_chars(unsigned result[], unsigned char str[], int len)
+void inverse_map_chars(unsigned result[], char str[], int len)
 {
     for (int i = 0; i < len; ++i)
         if (result[i] < 10)
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    unsigned char k[100],
+    char k[100],
                   t[100],
                   result[100];
     int xlen = strlen(argv[4]),
