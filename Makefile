@@ -18,7 +18,7 @@ ifeq ($(UNAME),Darwin)
 endif
 
 ifeq ($(UNAME),Linux)
-	LD_FLAG = -Wl
+	LD_FLAG = -Wl,-rpath=\$$ORIGIN
 	SONAME_ARG = -Wl,-soname
 	ADD_LIB_LOC = 
 	ADD_INC_LOC = 
@@ -53,7 +53,7 @@ $(FPE_BENCH_EXE): $(FPE_BENCH_SRC) $(LIB)
 	$(ADD_INC_LOC) $(ADD_LIB_LOC)
 
 clean:
-	rm $(OBJS) *.so* *.a
+	rm $(OBJS) *.so* *.a fpe_bench example
 
 remake:
 	-make clean
